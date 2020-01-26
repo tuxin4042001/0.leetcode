@@ -1,26 +1,40 @@
 package _4_depth_first_search;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Given a set of candidtate numbers candidates and a target number target. Find
+ * all unique combinations in candidates where the numbers sums to target.
+ * 
+ * 1.example 1: Input: candidates = [2, 3, 6, 7], target = 7 | Output: [[7], [2,
+ * 2, 3]] 2.example 2: Input: candidates = [1], target = 3, Output: [[1, 1, 1]]
+ * 
+ * @author terry
+ *
+ */
 public class _1_combination_sum {
+	/**
+	 * @param candidates: A list of integers
+	 * @param target:     An integer
+	 * @return: A list of lists of integers
+	 */
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
 		// write your code here
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<List<Integer>> list = new ArrayList<List<Integer>>();
+		List<Integer> combination = new ArrayList<Integer>();
 		if (candidates == null) {
-			return result;
+			return list;
 		}
-		List<Integer> combination = new ArrayList<>();
 		Arrays.sort(candidates);
-		helper(candidates, 0, target, combination, result);
-		return result;
+		helper(candidates, 0, list, combination, target);
+		return list;
 	}
 
-	void helper(int[] candidates, int index, int target, List<Integer> combination, List<List<Integer>> result) {
+	private void helper(int[] candidates, int index, List<List<Integer>> list, List<Integer> combination, int target) {
 		if (target == 0) {
-			result.add(new ArrayList(combination));
+			list.add(new ArrayList(combination));
 			return;
 		}
 		for (int i = index; i < candidates.length; i++) {
@@ -31,7 +45,7 @@ public class _1_combination_sum {
 				continue;
 			}
 			combination.add(candidates[i]);
-			helper(candidates, i, target - candidates[i], combination, result);
+			helper(candidates, i, list, combination, target - candidates[i]);
 			combination.remove(combination.size() - 1);
 		}
 	}

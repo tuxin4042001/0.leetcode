@@ -3,33 +3,44 @@ package _4_depth_first_search;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Given a list of numbers, return all possible permutations. example: Input:
+ * [1,2,3], Output:[[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
+ * 
+ * @author terry00
+ *
+ */
 public class _6_permutations {
-
+	/*
+	 * @param nums: A list of integers.
+	 * 
+	 * @return: A list of permutations.
+	 */
 	public List<List<Integer>> permute(int[] nums) {
 		// write your code here
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		if (nums == null) {
-			return result;
+			return list;
 		}
-		List<Integer> list = new ArrayList<Integer>();
+		List<Integer> permutation = new ArrayList<Integer>();
 		boolean[] visited = new boolean[nums.length];
-		backTrack(nums, visited, list, result);
-		return result;
+		helper(nums, visited, list, permutation);
+		return list;
 	}
 
-	private void backTrack(int[] nums, boolean[] visited, List<Integer> list, List<List<Integer>> result) {
-		if (list.size() == nums.length) {
-			result.add(new ArrayList<Integer>(list));
+	private void helper(int[] nums, boolean[] visited, List<List<Integer>> list, List<Integer> permutation) {
+		if (permutation != null && permutation.size() == nums.length) {
+			list.add(new ArrayList(permutation));
 		}
 		for (int i = 0; i < nums.length; i++) {
 			if (visited[i]) {
 				continue;
 			}
-			list.add(nums[i]);
+			permutation.add(nums[i]);
 			visited[i] = true;
-			backTrack(nums, visited, list, result);
+			helper(nums, visited, list, permutation);
 			visited[i] = false;
-			list.remove(list.size() - 1);
+			permutation.remove(permutation.size() - 1);
 		}
 	}
 
