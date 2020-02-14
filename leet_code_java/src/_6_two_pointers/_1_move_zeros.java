@@ -1,31 +1,28 @@
 package _6_two_pointers;
 
+/**
+ * Given an array nums, write a function to move all 0's to the end of it while
+ * maintaining the relative order of the non-zero elements.
+ * 
+ * Example 1:
+ * 
+ * Input: nums = [0, 1, 0, 3, 12], Output: [1, 3, 12, 0, 0].
+ * 
+ * Example 2:
+ * 
+ * Input: nums = [0, 0, 0, 3, 1], Output: [3, 1, 0, 0, 0].
+ * 
+ * @author terry00
+ *
+ */
+
 public class _1_move_zeros {
+	/**
+	 * @param nums: an integer array
+	 * @return: nothing
+	 */
+	// 1. Method 1: two pointer method
 	public void moveZeroes(int[] nums) {
-		// write your code here
-		if (nums == null || nums.length <= 1) {
-			return;
-		}
-		for (int i = 0; i < nums.length; i++) {
-			if (nums[i] == 0) {
-				for (int j = i + 1; j < nums.length; j++) {
-					if (nums[j] != 0) {
-						swap(nums, i, j);
-						break;
-					}
-				}
-			}
-		}
-	}
-
-	public void swap(int[] nums, int start, int end) {
-		int temp = nums[start];
-		nums[start] = nums[end];
-		nums[end] = temp;
-	}
-
-	// Ë«Ö¸Õë:¿ìÂýÖ¸Õë
-	public void moveZeroes2(int[] nums) {
 		// write your code here
 		if (nums == null || nums.length == 0) {
 			return;
